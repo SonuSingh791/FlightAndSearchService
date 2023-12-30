@@ -40,6 +40,28 @@ const get = async (req, res) => {
         });
     }
 }
+
+const getAll = async (req, res) => {
+    try {
+        console.log(req.query);
+        const cities = await cityService.getAllCities(req.query);
+        return res.status(200).json({
+            data: cities,
+            success: true,
+            message: "Cities fetched successfully",
+            err: {}
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            data: {},
+            success: false,
+            message: "Error getting city",
+            err: error
+        });
+    }
+};
+
 const update = async (req, res) => {
     try {
         const city = await cityService.updateCity(req.body, req.params.id);
@@ -81,6 +103,7 @@ const destroy = async (req, res) => {
 
 module.exports = {
     get: get,
+    getAll: getAll,
     create: create,
     update: update,
     destroy: destroy

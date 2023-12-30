@@ -15,6 +15,17 @@ class CityService {
         }
     }
 
+    async getAllCities(query) {
+        try {
+            console.log(query);
+            const cities = await this.cityRepository.getAllCities({name: query.name});
+            return cities;
+        } catch (error) {
+            console.log('Something went wrong at service layer', error);
+            throw {error};
+        }
+    }
+
     async createCity(data) {
         try {
             const city = await this.cityRepository.createCity(data);
