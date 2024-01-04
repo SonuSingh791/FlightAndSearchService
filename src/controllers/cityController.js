@@ -1,4 +1,4 @@
-const  CityService  = require('../services/cityService');
+const  {CityService}  = require('../services/index');
 
 const cityService = new CityService();
 
